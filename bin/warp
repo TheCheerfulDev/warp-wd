@@ -87,9 +87,9 @@ remove_warp_pwd() {
 
 show_warp() {
   if [[ -z $1 ]]; then
-      show_warp_pwd
-      return 0
-    fi
+    show_warp_pwd
+    return 0
+  fi
 
   if [[ ! -f "${WD_HOME}/$1" ]]; then
     echo -e " ${yellow}*${reset} Warp point ${yellow}$1${reset} doesn't exist."
@@ -97,6 +97,7 @@ show_warp() {
   fi
 
   echo -e " ${lightgreen}*${reset} Warp point: ${lightgreen}$1${reset} -> $(< "${WD_HOME}/$1")"
+  return 0
 }
 
 show_warp_pwd() {
@@ -138,28 +139,39 @@ list_warps() {
 
   for filename in "${WD_HOME}"/*
   do
-    echo "${filename##*/}  ->  $(< "$filename")"
+    echo -e "${lightgreen}${filename##*/}${reset}  ->  $(< "$filename")"
   done
   return 0
 }
 
 ls_warp() {
+  if [[ -z $1 ]]; then
+    ls
+    return 0
+  fi
+
   if [[ ! -f "${WD_HOME}/$1" ]]; then
     echo -e " ${yellow}*${reset} Warp point ${yellow}$1${reset} doesn't exist."
     return 1
   fi
 
   ls "$(< "${WD_HOME}/$1")"
-  return 1
+  return 0
 }
 
 path_warp() {
+  if [[ -z $1 ]]; then
+      pwd
+      return 0
+    fi
+
   if [[ ! -f "${WD_HOME}/$1" ]]; then
     echo -e " ${yellow}*${reset} Warp point ${yellow}$1${reset} doesn't exist."
     return 1
   fi
 
   echo "$(< "${WD_HOME}/$1")"
+  return 0
 }
 
 clean_warp() {

@@ -6,6 +6,7 @@ add_alias() {
   echo "alias wd='source ${PWD}/bin/warp'" >> "${HOME}"/.bashrc
   echo "### Added by warp-wd installation script ###" >> "${HOME}"/.bashrc
   echo "" >> "${HOME}"/.bashrc
+  alias wd='source ${PWD}/bin/warp'
 }
 
 if ! grep -q "Added by warp-wd installation script" "${HOME}"/.bashrc; then
